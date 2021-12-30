@@ -21,6 +21,7 @@ function updateSelectedCount() {
     })
     //  console.log(seatIndex);
     localStorage.setItem('selectedSeats', JSON.stringify(seatIndex));
+    
     /////////////////////////////////////
     // console.log(selectedSeats);
     const selectedSeatsCount = selectedSeats.length;
@@ -48,6 +49,10 @@ function populateUI() {
                 }
             })
         }
+        const selectedMovieIndex = localStorage.getItem('selectedMovieIndex')
+        if (selectedMovieIndex !== null) {
+             movieSelect.selectedIndex = selectedMovieIndex;
+        }
 }
 
 
@@ -70,11 +75,14 @@ container.addEventListener('click',  e => {
 movieSelect.addEventListener('change', e => {
     ticketPrice = +e.target.value;
     console.log(e.target.selectedIndex, e.target.value);
+    setMovieData(e.target.selectedIndex, e.target.value);
     updateSelectedCount();
 
 })
 
 
+// to not change the prize and seat value if refresh the page of browsers
+updateSelectedCount();
 
 
 
